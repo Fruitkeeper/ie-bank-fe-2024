@@ -15,6 +15,10 @@ const routes = [
     path: '/accounts',
     name: 'AppAccounts',
     component: AppAccounts
+  },
+  {
+    path: '*',
+    redirect: '/accounts'  // Make sure you have a catch-all route
   }
 ]
 
