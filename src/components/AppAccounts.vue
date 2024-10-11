@@ -6,7 +6,7 @@
           <h1>Accounts</h1>
           <hr />
           <br />
-          <!-- Allert Message -->
+          <!-- Alert Message -->
           <b-alert v-if="showMessage" variant="success" show>{{
             message
           }}</b-alert>
@@ -30,15 +30,16 @@
                 <th scope="col">Country</th>
                 <th scope="col">Account Status</th>
                 <th scope="col">Actions</th>
+
               </tr>
             </thead>
             <tbody>
               <tr v-for="account in accounts" :key="account.id">
                 <td>{{ account.name }}</td>
                 <td>{{ account.account_number }}</td>
-                <td>{{ account.balance || '0'}}</td>
+                <td>{{ account.balance | "N/A" }}</td>
                 <td>{{ account.currency }}</td>
-                <td>{{ account.country || 'N/A'}}</td>
+                <td>{{ account.country | "N/A"}}</td>
                 <td>
                   <span
                     v-if="account.status == 'Active'"
@@ -113,7 +114,7 @@
             </b-form-input>
           </b-form-group>
           <b-form-group
-            id="form-country-group"
+            id="form-currency-group"
             label="Country:"
             label-for="form-country-input"
           >
@@ -123,7 +124,8 @@
               v-model="createAccountForm.country"
               placeholder="Country"
               required
-            ></b-form-input>
+            >
+            </b-form-input>
           </b-form-group>
 
           <b-button type="submit" variant="outline-info">Submit</b-button>
@@ -176,7 +178,6 @@ export default {
       editAccountForm: {
         id: "",
         name: "",
-        country: "", 
       },
       showMessage: false,
       message: "",
@@ -190,11 +191,9 @@ export default {
     //GET function
     RESTgetAccounts() {
       const path = `${process.env.VUE_APP_ROOT_URL}/accounts`;
-      console.log(`Requesting: ${path}`);
       axios
         .get(path)
         .then((response) => {
-          console.log('Response:', response.data.accounts);
           this.accounts = response.data.accounts;
         })
         .catch((error) => {
@@ -264,11 +263,6 @@ export default {
         })
         .catch((error) => {
           console.error(error);
-          this.showMessage = true;
-          this.message = "An error occurred. Please try again.";
-          setTimeout(() => {
-            this.showMessage = false;
-          }, 3000);
           this.RESTgetAccounts();
         });
     },
@@ -294,7 +288,6 @@ export default {
         name: this.createAccountForm.name,
         currency: this.createAccountForm.currency,
         country: this.createAccountForm.country,
-        balance: 0, 
       };
       this.RESTcreateAccount(payload);
       this.initForm();
@@ -306,7 +299,6 @@ export default {
       this.$refs.editAccountModal.hide(); //hide the modal when submitted
       const payload = {
         name: this.editAccountForm.name,
-        country: this.editAccountForm.country,
       };
       this.RESTupdateAccount(payload, this.editAccountForm.id);
       this.initForm();

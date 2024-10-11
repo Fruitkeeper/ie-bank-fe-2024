@@ -13,9 +13,13 @@ on:
   workflow_dispatch:
 
 env:
-  FRONTEND_WEBAPP_DEV: aguadamillas-fe-dev
-  FRONTEND_WEBAPP_UAT: aguadamillas-fe-uat
-  FRONTEND_WEBAPP_PROD: aguadamillas-fe-prod
+<<<<<<< HEAD
+  FRONTEND_WEBAPP_DEV: lgomezacebo-fe-dev
+  FRONTEND_WEBAPP_UAT: lgomezacebo-fe-uat
+  FRONTEND_WEBAPP_PROD: lgomezacebo-fe-prod
+=======
+  FRONTEND_WEBAPP_DEV: lgomezacebo-fe-dev
+>>>>>>> 8ce769c (Made all the changes)
 
 jobs:
   build:
@@ -57,8 +61,13 @@ jobs:
       - uses: azure/login@v2
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+<<<<<<< HEAD
       
       - name: 'Deploy to Azure Web App (Development)'
+=======
+
+      - name: 'Deploy to Azure Web App'
+>>>>>>> 8ce769c (Made all the changes)
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
