@@ -33,31 +33,28 @@ h1 {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  color: transparent; 
-  margin-bottom: 20px;
+  color: transparent; /* Fallback for non-webkit browsers */
+  margin-bottom: 20px; /* Space between title and subtitle */
 }
 
 p {
   color: #0e0630;
-  font-size: 24px;
-  margin-bottom: 40px;
+  margin-bottom: 40px; /* Adds space between the subtitle and buttons */
 }
 
 .links {
   display: flex;
-  width: 100%;
   justify-content: center;
-  gap: 0 20px;
+  gap: 20px; /* Space between buttons */
 }
 
 .link-button {
+  padding: 10px 20px;
   background-color: #0648d7;
   color: white;
-  padding: 10px 20px;
-  border-radius: 5px;
   text-decoration: none;
+  border-radius: 5px;
   font-size: 18px;
-  font-weight: bold;
   transition: background-color 0.3s ease;
 }
 
